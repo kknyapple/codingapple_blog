@@ -9,6 +9,7 @@ function App() {
   ]);
   const [like, setLike] = useState([0, 0, 0]);
   const [modal, setModal] = useState(false);
+  const [mTitle, setMTitle] = useState(0);
 
   return (
     <div className="App">
@@ -22,8 +23,8 @@ function App() {
               <h4
                 onClick={() => {
                   {
-                    //modal === true ? setModal(false) : setModal(true);
                     setModal(!modal);
+                    setMTitle(i);
                   }
                 }}
               >
@@ -45,8 +46,9 @@ function App() {
           </div>
         );
       })}
+
       {modal === true ? (
-        <Modal title={title} setTitle={setTitle}></Modal>
+        <Modal title={title} setTitle={setTitle} mTitle={mTitle}></Modal>
       ) : null}
     </div>
   );
@@ -56,18 +58,9 @@ const Modal = (props) => {
   return (
     <>
       <div className="modal">
-        <h4>{props.title[0]}</h4>
+        <h4>{props.title[props.mTitle]}</h4>
         <p>날짜</p>
         <p>상세내용</p>
-        <button
-          onClick={() => {
-            let copy = [...props.title];
-            copy[0] = "여자코트 추천";
-            props.setTitle(copy);
-          }}
-        >
-          수정
-        </button>
       </div>
     </>
   );
